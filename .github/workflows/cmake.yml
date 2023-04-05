@@ -2,7 +2,7 @@ name: CMake
 
 on:
   push:
-    branches: [ "master" ]
+    branches: [ "harryz2000-patch-1" ]
   pull_request:
     branches: [ "master" ]
 

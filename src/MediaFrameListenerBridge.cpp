@@ -7,7 +7,7 @@
 
 using namespace std::chrono_literals;
 
-MediaFrameListenerBridge::MediaFrameListenerBridge(TimeService& timeService,DWORD ssrc, bool smooth, TimeBase* timeBase) : 
+MediaFrameListenerBridge::MediaFrameListenerBridge(TimeService& timeService,DWORD ssrc, bool smooth, TimeSyncInterface* timeSync) : 
 	timeService(timeService),
 	ssrc(ssrc),
 	smooth(smooth),
@@ -15,7 +15,7 @@ MediaFrameListenerBridge::MediaFrameListenerBridge(TimeService& timeService,DWOR
 	accumulatorFrames(1000),
 	accumulatorPackets(1000),
 	waited(1000),
-	timeBase(timeBase)
+	timeSync(timeSync)
 {
 	Debug("-MediaFrameListenerBridge::MediaFrameListenerBridge() [this:%p]\n", this);
 
@@ -43,7 +43,7 @@ MediaFrameListenerBridge::MediaFrameListenerBridge(TimeService& timeService,DWOR
 			//Increase accumulated time
 			//accumulated += duration;
 			uint64_t ts = 0;
-			advanced = timeBase->GetState(now, unifiedTs, ts);
+			advanced = timeSync->GetTimeDrift(now, unifiedTs, ts);
 			if (advanced < 0)
 				break;
 			
@@ -62,7 +62,7 @@ MediaFrameListenerBridge::MediaFrameListenerBridge(TimeService& timeService,DWOR
 		// 	//Increase accumulated time
 		// 	//accumulated += duration;
 		// 	uint64_t ts = 0;
-		// 	auto delay = timeBase->GetState(now, packet->GetTimestamp(), ts);
+		// 	auto delay = timeSync->GetState(now, packet->GetTimestamp(), ts);
 			
 		// 	//Log("Queue: %s %lld %d\n", packet->GetMediaType() == MediaFrame::Audio ? "a" : "v", delay, packets.size());
 		// }
@@ -128,7 +128,7 @@ void MediaFrameListenerBridge::onMediaFrame(DWORD ignored, const MediaFrame& fra
 			
 		uint64_t unifiedTs = frame->GetTimeStamp() * 90000/frame->GetClockRate();
 			
-		if (timeBase) timeBase->Update(frame->GetType(), now, unifiedTs);
+		if (timeSync) timeSync->Update(frame->GetType(), now, unifiedTs);
 
 		// //Dispatch any pending packet now
 		// std::vector<RTPPacket::shared> sending;
@@ -351,7 +351,7 @@ void MediaFrameListenerBridge::Reset()
 	timeService.Async([=](auto now){
 		reset = true;
 					
-		timeBase->reset();
+		timeSync->reset();
 	});
 }
 

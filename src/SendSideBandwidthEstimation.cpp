@@ -6,7 +6,7 @@
 constexpr uint64_t kInitialDuration		= 500E3;	// 500ms
 constexpr uint64_t kReportInterval		= 250E3;	// 250ms
 constexpr uint64_t kMonitorDuration		= 150E3;	// 150ms
-constexpr uint64_t kLongTermDuration		= 2.5E6;	// 2.5s
+constexpr uint64_t kLongTermDuration		= 10E6;		// 10s
 constexpr uint64_t kMinRate			= 128E3;	// 128kbps
 constexpr uint64_t kMaxRate			= 100E6;	// 100mbps
 constexpr uint64_t kMinRateChangeBps		= 10000;

@@ -275,6 +275,8 @@ public:
 		BYTE* payload;
 		VideoBackChannelMessageField()
 		{
+			ssrc = 0;
+			seq = 0;
 			type = 0;
 			payload = 0;
 			length = 0;

@@ -560,7 +560,7 @@ public:
 		return number;
 	}
 private:
-	long int number;
+	long int number = 0;
 };
 
 class JSONValue 
@@ -1197,7 +1197,7 @@ public:
 	}
 
 private:
-	long double number = 0;
+	long double number = 0.0;
 };
 #endif	/* STRINGPARSER_H */
 

@@ -124,7 +124,7 @@ public:
 	private:
 		typedef std::vector<Item::shared> Items;
 	private:
-		DWORD ssrc;
+		DWORD ssrc = 0;
 		Items items;
 	};
 public:

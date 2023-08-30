@@ -452,9 +452,9 @@ public:
 private:
 	typedef std::vector<Field::shared> Fields;
 private:
-	FeedbackType feedbackType;
-	DWORD senderSSRC;
-	DWORD mediaSSRC;
+	FeedbackType feedbackType {};
+	DWORD senderSSRC = 0;
+	DWORD mediaSSRC = 0;
 	Fields fields;
 };
 

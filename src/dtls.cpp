@@ -337,7 +337,7 @@ int DTLSConnection::Initialize()
 	// OK, we have DTLS.
 	DTLSConnection::hasDTLS = true;
 
-	Debug("<DTLSConnection::Initialize(%d)\n",availableHashes.size());
+	Debug("<DTLSConnection::Initialize(%lu)\n",availableHashes.size());
 	//OK
 	return 1;
 }
@@ -488,6 +488,8 @@ int DTLSConnection::Init()
 			//Read from sctp transport
 			while((len = sctp.ReadPacket(msg,MTU)))
 			{
+// Coverity error: Argument "len" to format specifier "%d" was expected to have type "int" but has type "unsigned long".
+// coverity[invalid_type]
 				UltraDebug("-sctp::OnPendingData() [len:%d]\n",len);
 				DumpAsC(msg,len);
 				//Write it to the ssl context
@@ -799,6 +801,8 @@ int DTLSConnection::SetupSRTP()
 	
 	//Check we know it
 	if (suite==UNKNOWN_SUITE)
+// Coverity error: Argument "profile->id" to format specifier "%d" was expected to have type "int" but has type "unsigned long".
+// coverity[invalid_type]
 		return Error("-DTLSConnection::SetupSRTP() | Unknown negotiated SRTP suite [id:%d,name:'%s']\n",profile->id,profile->name);
 	
 	//Get key & salt lengths

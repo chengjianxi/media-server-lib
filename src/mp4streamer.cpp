@@ -610,7 +610,7 @@ QWORD MP4RtpTrack::Read(Listener *listener)
 			return MP4_INVALID_TIMESTAMP;
 		}
 		
-		UltraDebug("Got frame [time:%d,start:%d,duration:%d,lenght:%d,offset:%d,sinc:%d\n",frameTime,startTime,duration,dataLen,renderingOffset,isSyncSample);
+		UltraDebug("Got frame [time:%d,start:%lu,duration:%lu,lenght:%d,offset:%lu,sinc:%d\n",frameTime,startTime,duration,dataLen,renderingOffset,isSyncSample);
 		
 		//Check type
 		if (media == MediaFrame::Video)
@@ -875,7 +875,9 @@ QWORD MP4TextTrack::GetNextFrameTime()
 
 double MP4Streamer::GetDuration()
 {
-	return MP4GetDuration(mp4)/MP4GetTimeScale(mp4);
+	auto scale = MP4GetTimeScale(mp4);
+	if (scale == 0) return 0.0;
+	return MP4GetDuration(mp4)/scale;
 }
 
 DWORD MP4Streamer::GetVideoWidth()

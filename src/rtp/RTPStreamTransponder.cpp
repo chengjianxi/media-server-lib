@@ -301,7 +301,7 @@ void RTPStreamTransponder::onRTP(const RTPIncomingMediaStream* stream,const RTPP
 			//Get first timestamp
 			firstTimestamp = packet->GetExtTimestamp();
 
-			UltraDebug("-StreamTransponder::onRTP() | first seq:%lu base:%lu last:%lu ts:%llu baseSeq:%lu baseTimestamp:%llu lastTimestamp:%llu\n",firstExtSeqNum,baseExtSeqNum,lastExtSeqNum,firstTimestamp,baseExtSeqNum,baseTimestamp,lastTimestamp);
+			UltraDebug("-StreamTransponder::onRTP() | first seq:%u base:%u last:%u ts:%llu baseSeq:%lu baseTimestamp:%llu lastTimestamp:%llu\n",firstExtSeqNum,baseExtSeqNum,lastExtSeqNum,firstTimestamp,baseExtSeqNum,baseTimestamp,lastTimestamp);
 		}
 
 		//Ensure it is not before first one
@@ -477,7 +477,7 @@ void RTPStreamTransponder::onRTP(const RTPIncomingMediaStream* stream,const RTPP
 		std::optional<std::vector<bool>> forwaredDecodeTargets;
 
 		//If it is AV1
-		if (codec==VideoCodec::AV1)
+		if (codec==VideoCodec::AV1 && selector)
 			//Get decode target
 			forwaredDecodeTargets = static_cast<DependencyDescriptorLayerSelector*>(selector.get())->GetForwardedDecodeTargets();
 

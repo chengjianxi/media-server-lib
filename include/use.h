@@ -181,7 +181,9 @@ public:
 			//Check error
 			if (ret)
 				//Print error
-				Error("-WaitQueue cond timedwait error [%rd,%d]\n",ret,errno);
+// Coverity error: Invalid conversion specifier in "%r".
+// coverity[format_error]
+				Error("-WaitQueue cond timedwait error [%d,%d]\n",ret,errno);
 		}
 		
 		//If we have been cancel

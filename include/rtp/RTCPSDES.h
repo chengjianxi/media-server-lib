@@ -77,6 +77,8 @@ public:
 		{
 			this->type = type;
 			size = strlen(str);
+// Ignore coverity error: Allocating insufficient memory for the terminating null of the string.
+// coverity[alloc_strlen]
 			data = (BYTE*)malloc(size);
 			memcpy(data,(BYTE*)str,size);
 		}

@@ -23,6 +23,7 @@ AVCDescriptor::AVCDescriptor()
 	numOfPictureParameterSets = 0;
 	ppsTotalSizes = 0;
 	spsTotalSizes = 0;
+	NALUnitLengthSizeMinus1 = 0;
 }
 
 bool AVCDescriptor::Parse(const BYTE* buffer,DWORD bufferLen)

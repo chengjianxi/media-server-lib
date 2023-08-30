@@ -126,6 +126,8 @@ public:
 
 		ReferencePictureSelectionField()
 		{
+			padding = 0;
+			type = 0;
 			payload = NULL;
 			length = 0;
 		}
@@ -273,6 +275,7 @@ public:
 		BYTE* payload;
 		VideoBackChannelMessageField()
 		{
+			type = 0;
 			payload = 0;
 			length = 0;
 		}

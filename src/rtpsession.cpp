@@ -1132,7 +1132,6 @@ int RTPSession::ReSendPacket(int seq)
 			listener->onFPURequested(this);
 		//Empty rtx queue
 		rtxs.clear();
-		
 		return 0;
 	}
 

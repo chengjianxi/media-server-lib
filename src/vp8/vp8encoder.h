@@ -41,6 +41,21 @@ private:
 	int num;
 	int threads;
 	int cpuused;
+	int maxKeyFrameBitratePct;
+	int deadline;
+	int errorResilientPartitions;
+	int dropFrameThreshold;
+	vpx_rc_mode endUsage;
+	int minQuantizer;
+	int maxQuantizer;
+	int undershootPct;
+	int overshootPct;
+	int bufferSize;
+	int bufferInitialSize;
+	int bufferOptimalSize;
+	int staticThreshold;
+	int noiseReductionSensitivity;
+
 };
 
 #endif	/* VP8ENCODER_H */
